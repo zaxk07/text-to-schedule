@@ -1,0 +1,123 @@
+@import "@fontsource-variable/bricolage-grotesque";
+@import "@fontsource-variable/instrument-sans";
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Instrument Sans Variable", ui-sans-serif, system-ui, sans-serif;
+
+  --color-page: var(--page);
+  --color-panel: var(--panel);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-alert: var(--alert);
+  --color-alert-soft: var(--alert-soft);
+}
+
+:root {
+  --page: #e9edf3;
+  --panel: #fbfcfe;
+  --ink: #101a2c;
+  --muted: #5b6678;
+  --line: #d3dae5;
+  --accent: #2a3fd8;
+  --accent-ink: #ffffff;
+  --alert: #d6264a;
+  --alert-soft: #fde8ec;
+  --grid-line: #e1e6ee;
+  color-scheme: light;
+}
+
+.dark {
+  --page: #0c1118;
+  --panel: #131a24;
+  --ink: #e8edf6;
+  --muted: #94a0b4;
+  --line: #263041;
+  --accent: #7d8cff;
+  --accent-ink: #0c1118;
+  --alert: #ff6b86;
+  --alert-soft: #3a1620;
+  --grid-line: #1c2431;
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---- Course cards: one hue per course code, tuned per theme ---- */
+.course-card {
+  --card-bg: hsl(var(--h) 90% 91%);
+  --card-edge: hsl(var(--h) 72% 44%);
+  --card-ink: hsl(var(--h) 65% 17%);
+  background: var(--card-bg);
+  color: var(--card-ink);
+  border-left: 4px solid var(--card-edge);
+}
+
+.dark .course-card {
+  --card-bg: hsl(var(--h) 38% 21%);
+  --card-edge: hsl(var(--h) 75% 62%);
+  --card-ink: hsl(var(--h) 80% 92%);
+}
+
+.course-chip {
+  background: hsl(var(--h) 72% 44%);
+}
+.dark .course-chip {
+  background: hsl(var(--h) 75% 62%);
+}
+
+.course-card[data-conflict="true"] {
+  outline: 2px dashed var(--alert);
+  outline-offset: -2px;
+  border-left-color: var(--alert);
+}
+
+.timetable-body {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(var(--slot) * 2 - 1px),
+    var(--grid-line) calc(var(--slot) * 2 - 1px),
+    var(--grid-line) calc(var(--slot) * 2)
+  );
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    animation: reveal 0.35s ease-out both;
+  }
+  @keyframes reveal {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+  }
+}
