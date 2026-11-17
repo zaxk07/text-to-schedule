@@ -121,3 +121,39 @@ h3 {
     }
   }
 }
+
+/* ---- Motion: short, ease-out, transform/opacity only ---- */
+.press {
+  transition: transform 0.12s ease-out, background-color 0.15s, opacity 0.15s;
+}
+.press:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-enter {
+    animation: rise 0.28s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .rise {
+    animation: rise 0.45s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  .preview-block {
+    animation: pop-in 0.4s cubic-bezier(0.23, 1, 0.32, 1) both;
+    animation-delay: calc(var(--i, 0) * 45ms + 250ms);
+  }
+  .pop {
+    animation: pop-in 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.92);
+    }
+  }
+}
